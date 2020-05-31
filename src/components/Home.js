@@ -11,7 +11,7 @@ export default function SimpleContainer() {
         <CssBaseline />
         <Container maxWidth="lg">
           <PatientSearch />
-       {/*   <Appointments/> */}
+       { <Appointments/> }
         </Container>
       </React.Fragment>
     );

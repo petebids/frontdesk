@@ -12,6 +12,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import PatientDataService from '../service/PatientDataService'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,6 +34,13 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(3, 0, 2),
     },
     root: {
+       /* background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+        border: 0,
+        borderRadius: 3,
+        boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+        color: 'white',
+        height: 48,
+        padding: '0 30px',*/
         '& > *': {
           margin: theme.spacing(1),
         },
@@ -45,6 +53,22 @@ export default function PatientSearch() {
     const [isLoading, setIsLoading] = useState(false);
     const classes = useStyles();
 
+    useEffect(()=>{
+        retriveAllPatients();
+
+    },[]);
+
+    const retriveAllPatients = () =>{
+        PatientDataService.getAll()
+        .then(response => {
+            setpatientSearchResult(response.data)
+        })
+        .catch(e => {
+            console.log(e);
+          });
+
+    };
+/*
     const patientSearch = useCallback(async() =>{
         if(isLoading) return
         setIsLoading(true)
@@ -65,7 +89,7 @@ export default function PatientSearch() {
             })
             .catch(error => console.log(error));
         }, []);
-
+*/
   return (
     <Container component="main" maxWidth="md">
 
@@ -89,7 +113,7 @@ export default function PatientSearch() {
         <div className={classes.root}>
         <Button
             type="submit"
-            onClick={patientSearch}
+            /*onClick={patientSearch}*/ 
             variant="contained"
             color="primary"
             className={classes.submit}
@@ -117,7 +141,7 @@ export default function PatientSearch() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {patientSearchResult.map(row => (
+          {patientSearchResult && patientSearchResult.map(row => (
             <TableRow >
               <TableCell align="right">{row.firstName}</TableCell>
               <TableCell align="right">{row.middleName}</TableCell>
