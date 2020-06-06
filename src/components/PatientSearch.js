@@ -68,7 +68,7 @@ export default function PatientSearch() {
           });
 
     };
-/*
+
     const patientSearch = useCallback(async() =>{
         if(isLoading) return
         setIsLoading(true)
@@ -89,7 +89,7 @@ export default function PatientSearch() {
             })
             .catch(error => console.log(error));
         }, []);
-*/
+
   return (
     <Container component="main" maxWidth="md">
 
